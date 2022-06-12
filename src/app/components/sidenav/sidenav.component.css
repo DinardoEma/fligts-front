@@ -1,0 +1,71 @@
+.sidenav {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.spacer{
+  flex: 1 1 auto;
+}
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  z-index: 2;
+}
+.example-toolbar{
+  /*background: rgb(185, 22, 136);*/
+}
+h1.example-app-name {
+  margin-left: 8px;
+}
+
+.example-sidenav-container {
+  flex: 1;
+}
+
+.example-is-mobile .example-sidenav-container {
+  flex: 1 0 auto;
+}
+
+.sidenavContent{
+  background: -prefix-linear-gradient(left, rgb(197, 129, 206), rgb(156, 15, 114));
+  background: linear-gradient(to right, rgb(197, 129, 206), rgb(156, 15, 114));
+}
+
+.soleado{
+  box-shadow: rgba(216, 206, 70, 1) 0px 30px 60px -12px inset, rgba(252, 255, 50, 1) 0px 18px 36px -18px inset;
+}
+
+.nublado{
+  box-shadow: rgb(175, 163, 163,1) 0px 30px 60px -12px inset, rgb(197, 197, 185,1) 0px 18px 36px -18px inset;
+}
+
+.lluvia{
+  box-shadow: rgb(54, 124, 230) 0px 30px 60px -12px inset, rgb(65, 160, 238) 0px 18px 36px -18px inset;
+}
+
+.llovizna{
+  box-shadow: rgb(66, 85, 255) 0px 30px 60px -12px inset,rgb(75, 72, 255) 0px 18px 36px -18px inset;
+}
+
+.neblina{
+  box-shadow: rgb(162, 252, 255,1) 0px 30px 60px -12px inset, rgb(113, 255, 248,1) 0px 18px 36px -18px inset;
+}
+
+.nevado{
+  box-shadow: rgb(252, 252, 252,1) 0px 30px 60px -12px inset, rgb(255, 255, 255,1) 0px 18px 36px -18px inset;
+}
+
+.lluvia-Intermitente{
+  box-shadow: rgb(127, 125, 255,1) 0px 30px 60px -12px inset, rgb(140, 128, 255,1) 0px 18px 36px -18px inset;
+}
+
+.nieve-Intermitente{
+  box-shadow: rgb(184, 179, 179,1) 0px 30px 60px -12px inset, rgb(170, 170, 170,1) 0px 18px 36px -18px inset;
+}
+
+.Tormenta-Electrica{
+  box-shadow: rgba(139, 139, 139, 0.918) 0px 30px 60px -12px inset,  rgb(255, 230, 0) 0px 18px 36px -18px inset;
+}

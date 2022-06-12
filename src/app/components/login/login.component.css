@@ -1,0 +1,66 @@
+body, html {
+    height: 100%;
+  
+}
+.bg {
+    background-image: url("../../../assets/imagenes-front/aero1.jpg");
+  
+    width: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+    
+}
+.login {
+    height: 100vh;
+    min-height:600px;
+    margin-left: 55%;
+    width: 400px;
+}
+.login > div {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(40%,-50%);
+    max-width: 50%;
+    text-align: center;
+}
+.form{
+    height: 400px;
+    width: 350px;
+    border: 2px solid;
+    border-radius: 20px;
+    background: -prefix-linear-gradient(left, rgb(254, 231, 189), rgb(171, 58, 138));
+    background: linear-gradient(to right, rgb(254, 231, 189), rgb(171, 58, 138));
+}
+.user{
+    padding-top: 10px;
+}
+input{
+    background-color: transparent !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: black;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.errorLogin{
+    color: red;
+}

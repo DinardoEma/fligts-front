@@ -1,0 +1,89 @@
+<h1 mat-dialog-title> Acciones para el clima {{data.climaActual}} :</h1>
+<div mat-dialog-content *ngIf = "data.climaActual === 'soleado' ">
+    <ul>
+        <li> <h2> Hidratarse </h2> </li>
+        <li> <h2> Usar proteccion para el sol, lentes, gorro, etc </h2> </li>
+    </ul>
+</div>
+<div mat-dialog-content *ngIf = "data.climaActual === 'nublado' ">
+    <ul>
+        <li> <h2> Circular con precaución. </h2></li>
+    </ul>
+</div>
+<div mat-dialog-content *ngIf = "data.climaActual === 'lluvia' ">
+    <ul>
+        <li> <h2> Circular con precaución. </h2></li>
+        <li> <h2> Cubrir el equipaje para protegerlo, antes de la estiba. </h2></li>
+        <li> <h2> Utilizar señales visuales (Luces). </h2></li>
+        <li> <h2> Utilizar micros / mangas para el embarque de pasajeros. </h2></li>
+    </ul>
+</div>
+
+<div mat-dialog-content *ngIf = "data.climaActual === 'llovizna' ">
+    <ul>
+        <li> <h2> Circular con precaución. </h2></li>
+        <li> <h2> Cubrir el equipaje para protegerlo, antes de la estiba. </h2></li>
+        <li> <h2> Utilizar señales visuales (Luces). </h2></li>
+        <li> <h2> Utilizar micros / mangas para el embarque de pasajeros. </h2></li>
+    </ul>
+</div>
+<div mat-dialog-content *ngIf = "data.climaActual === 'neblina' ">
+    <ul>
+        <li> <h2> Circular con precaución. </h2></li>
+        <li> <h2> Utilizar señales visuales.</h2></li>
+        <li> <h2> Detener el vuelo si los pilotos lo consideran necesario. </h2></li>
+    </ul>
+</div>
+<div mat-dialog-content *ngIf = "data.climaActual === 'nevado' ">
+    <ul>
+        <li> <h2> Pasar vehículos de fricción y quita nieves.</h2></li>
+        <li> <h2> Hacer el deshielo de aviones antes del vuelo. </h2></li>
+        <li> <h2> Mantener despejada la plataforma y la pista. </h2></li>
+        <li> <h2> Utilizar micros / mangas para el embarque de pasajeros. </h2></li>
+        <li> <h2> Cubrir el equipaje para protegerlo, antes de la estiba.</h2></li>
+    </ul>
+</div>
+<div mat-dialog-content *ngIf = "data.climaActual === 'lluvia-Intermitente' ">
+    <ul>
+        <li> <h2> Circular con precaución. </h2></li>
+        <li> <h2> Cubrir el equipaje para protegerlo, antes de la estiba. </h2></li>
+        <li> <h2> Utilizar señales visuales (Luces). </h2></li>
+        <li> <h2> Utilizar micros / mangas para el embarque de pasajeros. </h2></li>
+    </ul>
+</div>
+<div mat-dialog-content *ngIf = "data.climaActual === 'nieve-Intermitente' ">
+    <ul>
+        <li> <h2> Pasar vehículos de fricción y quita nieves.</h2></li>
+        <li> <h2> Hacer el deshielo de aviones antes del vuelo. </h2></li>
+        <li> <h2> Mantener despejada la plataforma y la pista. </h2></li>
+        <li> <h2> Utilizar micros / mangas para el embarque de pasajeros. </h2></li>
+        <li> <h2> Cubrir el equipaje para protegerlo, antes de la estiba.</h2></li>
+    </ul>
+</div>
+<div mat-dialog-content *ngIf = "data.climaActual === 'Tormenta-Electrica' ">
+    <ul>
+        <li><h2>Caminos a zonas seguras deben estar despejados.</h2></li>
+        <li><h2>Conocer las vías de circulación disponibles.</h2></li>
+        <li><h2>Seguir indicaciones de los Supervisores a Cargo.</h2></li>
+        <li><h1 style="text-decoration: underline overline rgb(230, 230, 66);">Alerta Amarilla: </h1>
+            <ul>
+                <li><h2>No utilizar dispositivos con cable para comunicarse con la Aeronave. </h2></li>
+                <li><h2>Mantener embarques iniciados.</h2></li>
+                <li><h2>Pasajeros y tripulación en Aeronave deben mantener posición hasta el cese de la Alerta. </h2></li>
+                <li><h2>No se podrá continuar con la carga de combustible si los pasajeros están a bordo.</h2></li>
+            </ul>
+        </li>
+        <li><h1 style="text-decoration: underline overline red;">Alerta Roja: </h1>
+            <li><h2>Se suspenden actividades en plataforma. </h2></li>
+            <li><h2>Todo el personal debe ir a las Zonas seguras.</h2></li>
+            <li><h2>Solo embarques por manga.</h2></li>
+            <li><h2>Pasajeros deben permanecer en el micro, al pie del avión.</h2></li>
+            <li><h2>Interrupción de servicios.</h2></li>
+            <li><h2>Interrupción de Estiba / Desestiba de equipajes.</h2></li>
+            <li><h2>Se suspende la carga de combustible.</h2></li>
+            <li><h2>No se conectaran, ni desconectaran los grupos electrógenos (GPU).</h2></li>
+    </ul>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary" cdkFocusInitial (click) = "ok()">Ok</button>
+</div>

@@ -1,0 +1,33 @@
+
+<div class="seleccionador">
+    <div class="select">
+        <h2>Seleccione el Tablero que quiere ver</h2>
+        <mat-form-field appearance="fill">
+            <mat-label>Selecciona un Tablero</mat-label>
+            <mat-select [(value)]="selected">
+            <mat-option *ngFor="let dashboard of dashboards" [value] = "dashboard"> {{dashboard}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf = "selected === '360'">
+        <h2> Tablero de Special Flights </h2>
+        <iframe
+            src="http://power-metabase-data-bi.herokuapp.com/public/dashboard/0c0ca232-d020-475a-8bc2-77d086ccee5f"
+            frameborder="0"
+            width="100%"
+            height="1000px"
+            allowtransparency
+        ></iframe>
+    </div>
+    <div *ngIf = "selected === 'Operaciones Terrestres'">
+        <h2> Tablero de Operaciones Terrestres </h2>
+        <iframe
+            src="https://power-metabase-data-bi.herokuapp.com/public/dashboard/eecfc8ca-95cc-4411-ab95-a5374b6f4319"
+            frameborder="0"
+            width= 100%
+            height="1000px"
+            allowtransparency
+        ></iframe>
+    </div>
+</div>
+  

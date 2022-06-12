@@ -1,0 +1,72 @@
+<div class="dialog">
+    <h1 mat-dialog-title> Editando a {{data.nombre}}</h1>
+    <div mat-dialog-content>
+        <mat-form-field appearance="fill">
+            <mat-label> ID: </mat-label>
+            <input matInput [(ngModel)] = "data.idUsuario" [disabled] = "true">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label> Nombre: </mat-label>
+            <input matInput [(ngModel)] = "data.nombre">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label> Apellido:</mat-label>
+            <input matInput [(ngModel)] = "data.apellido">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label> Codigo Usuario:</mat-label>
+            <input matInput [(ngModel)] = "data.codigoUsuario" [disabled] = "true">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label> DNI:</mat-label>
+            <input matInput [(ngModel)] = "data.dni" type="number">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label> Contraseña:</mat-label>
+            <input matInput [(ngModel)] = "data.contrasena" [type]="hide ? 'password' : 'text'">
+            <button  mat-icon-button matSuffix (click)="hide = !hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label> FechaCreacion:</mat-label>
+            <input matInput [(ngModel)] = "data.fechaCreacion" [disabled] = "true">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label> Nombre Creador:</mat-label>
+            <input matInput [(ngModel)] = "data.nombreCreador" [disabled] = "true">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label> Nombre Modificar:</mat-label>
+            <input matInput [(ngModel)] = "data.nombreModificador" [disabled] = "true">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label> Activo:</mat-label>
+            <input matInput [(ngModel)] = "data.activo" [disabled] = "true">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label> Correo:</mat-label>
+            <input matInput [(ngModel)] = "data.correo">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label> Rol:</mat-label>
+            <input matInput [(ngModel)] = "data.rolUsuario">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label> Aeropuerto:</mat-label>
+            <input matInput [(ngModel)] = "data.iataAeropuerto">
+        </mat-form-field>
+        
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button color="warn" (click) = "borrar()"> Borrar Usuario    </button>
+        <button mat-button (click) = "cancelar()"> Cancelar    </button>
+        <button mat-button [mat-dialog-close]="{idUsuario: data.idUsuario, nombre: data.nombre, 
+            apellido: data.apellido, codigoUsuario: data.codigoUsuario, dni: data.dni, 
+            'contraseña': data.contrasena, fechaCreacion: data.fechaCreacion, nombreCreador: data.nombreCreador, 
+            nombreModificador: data.nombreModificador, activo: data.activo, correo: data.correo,
+            rolUsuario: data.rolUsuario, iataAeropuerto: data.iataAeropuerto}" 
+        cdkFocusInitial>Ok</button>
+    </div>
+</div>
+

@@ -1,0 +1,32 @@
+<h1 mat-dialog-title> Detalles del vuelo {{data.idVuelo}}</h1>
+<h3 mat-dialog-title> Acciones del comisariato:</h3>
+<div mat-dialog-content>
+    <mat-form-field appearance="fill" class="container">
+        <mat-label> <h3> ID Vuelo: </h3> </mat-label>
+        <input matInput [disabled] = "true"> <h3> {{data.idVuelo}} </h3>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="container">
+        <mat-label> <h3> Aeronave: </h3> </mat-label>
+        <input matInput [disabled] = "true"> <h3> {{data.idAeronave}} </h3>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="{{ estilo(limpieza) }}">
+        <mat-label> <h3> Limpieza de la nave: </h3> </mat-label>
+        <input matInput [disabled] = "true"> <h3> {{limpieza}} </h3>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="{{ estilo(verificacion) }}">
+        <mat-label> <h3> Verificacion Interna: </h3> </mat-label>
+        <input matInput [disabled] = "true"> <h3> {{verificacion}} </h3>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="{{ estilo(seguridad) }}">
+        <mat-label> <h3> Elementos de Seguridad: </h3> </mat-label>
+        <input matInput [disabled] = "true"> <h3> {{seguridad}} </h3>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="{{ estilo(bolsas) }}">
+        <mat-label> <h3> Bolsas de mareo: </h3> </mat-label>
+        <input matInput [disabled] = "true"> <h3> {{bolsas}} </h3>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button cdkFocusInitial (click) = "ok()">Ok</button>
+</div>
+

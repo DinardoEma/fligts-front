@@ -1,0 +1,11 @@
+.container{
+    margin-top: 20px;
+    margin-left: 20%;
+    background-color: rgb(255, 255, 255, 0.4);
+    width: 700px;
+    text-align: center;
+}
+.container mat-form-field{
+    margin-right: 10px;
+    margin-left: 10px;
+}

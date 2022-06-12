@@ -1,0 +1,67 @@
+<div class="reportes">
+    <div class="reporte">
+            <h1> Reporte de cargas </h1>
+        <mat-form-field appearance="fill">
+            <mat-label>Ejemplo: SF1364</mat-label>
+            <input matInput [formControl]="vuelo" required>
+            <mat-error *ngIf="vuelo.invalid">Debes ingresar un valor</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Fecha del vuelo</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)] = "fecha" disabled (dateInput)="addEvent('input', $event)">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled = "false"></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Hora del vuelo</mat-label>
+            <input matInput [ngxTimepicker]="picker2" [format] = 24 [formControl] = "time" required>
+            <ngx-material-timepicker #picker2></ngx-material-timepicker>
+            <mat-error *ngIf="time.invalid">Debes ingresar un valor</mat-error>
+        </mat-form-field>
+        <h2> Tipos de reportes: </h2>
+    </div>
+    <ul class="vuelos">
+        <div>
+            <li> <h3> Un vuelo especifico </h3></li>
+            <button mat-raised-button color="primary"  (click)="generarReporteVuelo()" [disabled] = "!vuelo.valid || !time.valid || !eventoFecha"> Generar Reporte </button>
+            <button mat-raised-button color="primary"  (click)="esconderReporteVuelo()" style="margin-left: 30px"> Borrar reporte </button>
+        </div>
+        <div>
+            <li> <h3> Desde una fecha hasta la actualidad </h3></li>
+            <button mat-raised-button color="primary"  (click)="generarReporteFecha()" [disabled] = "!time.valid || !eventoFecha"> Generar Reporte </button>
+            <button mat-raised-button color="primary"  (click)="esconderReporteFecha()" style="margin-left: 30px"> Borrar reporte </button>
+        </div>
+        <div>
+            <li> <h3> Un vuelo especifico, desde una fecha hasta la actualidad </h3></li>
+            <button mat-raised-button color="primary"  (click)="generarReporte()" [disabled] = "!vuelo.valid || !time.valid || !eventoFecha"> Generar Reporte </button>
+            <button mat-raised-button color="primary"  (click)="esconderReporte()" style="margin-left: 30px"> Borrar reporte </button>
+        </div>
+        <div class="footer"> Reporte generado: </div>
+    </ul>
+    <div *ngIf = "reporteVuelo">
+        <pdf-viewer 
+            [src] = "pdfSrc"
+            [render-text]="true"
+            [original-size]="false"
+            style="width: 100%; height: 600px"
+        ></pdf-viewer>
+    </div>
+    <div *ngIf = "reporte">
+        <pdf-viewer 
+            [src] = "pdfSrc"
+            [render-text]="true"
+            [original-size]="false"
+            style="width: 100%; height: 600px"
+        ></pdf-viewer>
+    </div>
+    <div *ngIf = "reporteFecha">
+        <pdf-viewer 
+            [src] = "pdfSrc"
+            [render-text]="true"
+            [original-size]="false"
+            style="width: 100%; height: 600px"
+        ></pdf-viewer>
+    </div>
+</div>
+

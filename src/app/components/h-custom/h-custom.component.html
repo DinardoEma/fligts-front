@@ -1,0 +1,42 @@
+<div class = "Historial"> 
+    <h1> Historial personalizado</h1>
+    <div class = "table">
+        <table mat-table [dataSource]= "dataTable">
+            <ng-container *ngFor="let col of columns" [matColumnDef]="col">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ col }} </th>
+                <td mat-cell *matCellDef="let element"> {{ element[col] }} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                (dblclick)="detalle(row)">
+            </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10]"
+                     showFirstLastButtons 
+                     aria-label="Select page of vuelos">
+        </mat-paginator>
+        <h2>Seleccione que columnas desea mostrar</h2>
+        <div [formGroup]="table" class="checkbox">
+            <div>
+                <div *ngFor= "let campo of columns2">
+                    <mat-checkbox [formControlName] = "campo" (click) = "cambiar(campo)"> {{campo}} </mat-checkbox>
+                </div>
+            </div>
+            <div>
+                <div *ngFor= "let campo of columns3">
+                    <mat-checkbox [formControlName] = "campo" (click) = "cambiar(campo)"> {{campo}} </mat-checkbox>
+                </div>
+            </div>
+            <div>
+                <div *ngFor= "let campo of columns4">
+                    <mat-checkbox [formControlName] = "campo" (click) = "cambiar(campo)"> {{campo}} </mat-checkbox>
+                </div>
+            </div>
+            <div>
+                <div *ngFor= "let campo of columns5">
+                    <mat-checkbox [formControlName] = "campo" (click) = "cambiar(campo)"> {{campo}} </mat-checkbox>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>

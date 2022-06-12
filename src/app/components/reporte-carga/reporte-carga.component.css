@@ -1,0 +1,23 @@
+.reporte{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.reportes{
+    margin-top: 20px;
+    margin-left: 20%;
+    background-color: rgb(255, 255, 255, 0.4);
+    width: 800px
+}
+.vuelos{
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.vuelos div{
+    margin-bottom: 20px;
+    margin-left: 40px;
+    width: 400px
+}
+.footer{
+    margin-top: 20px;
+}

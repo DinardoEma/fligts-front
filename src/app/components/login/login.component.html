@@ -1,0 +1,42 @@
+<div class="bg">
+    <div class = "login">
+        <div class="form">
+            <div class="mensaje">
+                <h2> Bienvenido!</h2>
+                <h2>Operaciones Terrestres</h2>
+                    <h2>Special Flights</h2>
+            </div>
+            <div class="user">
+                <mat-form-field appearance="outline" style="width: 260px">
+                    <mat-label>Usuario</mat-label>
+                    <mat-icon matPrefix> person</mat-icon>
+                    <input matInput  id="user" [formControl]="user" required>
+                    <mat-error *ngIf="user.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="password">
+                <mat-form-field appearance="outline">
+                    <mat-label>Contraseña</mat-label>
+                    <mat-icon matPrefix> lock</mat-icon>
+                    <input id="password" [formControl]="password"  matInput [type]="hide ? 'password' : 'text'" required> 
+                    <button  mat-icon-button matSuffix (click)="hide = !hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="password.invalid"> Debes ingresar un valor </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="submit">
+                <button mat-raised-button color="primary" id="submit" 
+                type="submit" style="width: 260px" [disabled]="!user.valid || !password.valid"
+                 (click)="ingresar()">Ingresar</button>
+            </div>
+            <div *ngIf="errorLogin$" class="errorLogin"> 
+                <h2> Datos incorrectos </h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

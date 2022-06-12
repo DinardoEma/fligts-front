@@ -1,0 +1,37 @@
+<h1 mat-dialog-title> Detalles del vuelo {{data.idVuelo}}</h1>
+<h3 mat-dialog-title> Verificaciones antes del despegue</h3>
+<div mat-dialog-content>
+    <mat-form-field appearance="fill" class="container">
+        <mat-label class="label"> <h3> ID Vuelo: </h3> </mat-label>
+        <input matInput [disabled] = "true"> <h3> {{data.idVuelo}} </h3>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="container">
+        <mat-label class="label"> <h3> Aeronave: </h3> </mat-label>
+        <input matInput [disabled] = "true"> <h3> {{data.idAeronave}} </h3>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="container">
+        <mat-label class="label"> <h3> Autorizacion de Pista: </h3></mat-label>
+        <input matInput [disabled] = "true">  <h3> Autorizado </h3>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="container">
+        <mat-label class="label"> <h3> Torre de control: </h3></mat-label>
+        <input matInput [disabled] = "true"> <h3> Autorizado </h3>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="container">
+        <mat-label class="label"> <h3> Emergencias en tierra: </h3></mat-label>
+        <input matInput [disabled] = "true" > <h3> Activas </h3>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="container">
+        <mat-label class="label"> <h3> Seguridad en tierra: </h3></mat-label>
+        <input matInput [disabled] = "true"> <h3> Activas </h3>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="{{ estilo(mantenimientoAeronave) }}">
+        <mat-label class="label"> <h3> Mantenimiento: </h3></mat-label>
+        <input matInput [disabled] = "true"> <h3> {{(mantenimientoAeronave) ? 'Aprobado' : 'Rechazado'}} </h3>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click) = "comisariato()">Comisariato</button>
+    <button mat-button cdkFocusInitial (click) = "ok()">Ok</button>
+</div>
+

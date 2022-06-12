@@ -1,0 +1,7 @@
+{
+    "/api/*":{
+        "target" : "https://opr-terrestres.herokuapp.com",
+        "secure" : false,
+        "loglevel" : "debug"
+    }
+}

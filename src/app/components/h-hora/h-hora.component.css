@@ -1,0 +1,23 @@
+table{
+    width: 100%;
+    background: rgb(255, 255, 255, 0.2);
+}
+mat-paginator{
+    background: rgb(255, 255, 255, 0.5);
+}
+.checkbox{
+    display: flex;
+}
+.Historial{
+    text-align: center;
+    width: 100%;
+    background: rgb(255, 255, 255, 0.4);
+}
+.mat-row:hover .mat-cell {
+    border-color: currentColor;
+}
+.mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}

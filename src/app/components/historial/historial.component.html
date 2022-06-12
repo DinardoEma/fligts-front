@@ -1,0 +1,13 @@
+<div class="seleccionador">
+  <h2>Seleccione el Historial que desea ver</h2>
+  <mat-form-field appearance="fill">
+      <mat-label>Selecciona un Historial</mat-label>
+      <mat-select [(value)]="selected">
+        <mat-option *ngFor="let historial of historiales" [value] = "historial"> {{historial}}</mat-option>
+      </mat-select>
+  </mat-form-field>
+</div>
+<div *ngIf = "selected === 'Hora'"><app-h-hora></app-h-hora></div>
+<div *ngIf = "selected === 'Personalizado'"><app-h-custom></app-h-custom></div>
+<div *ngIf = "selected === 'Consumo'"><app-h-consumo></app-h-consumo></div>
+<div *ngIf = "selected === 'General'"><app-h-general></app-h-general></div>

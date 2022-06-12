@@ -1,0 +1,13 @@
+<div class="seleccionador">
+    <h2>Seleccione el Reporte que desea mostrar</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Selecciona un Reporte</mat-label>
+        <mat-select [(value)]="selected">
+          <mat-option *ngFor="let reporte of reportes" [value] = "reporte"> {{reporte}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+  <div *ngIf = "selected === 'Cargas'"><app-reporte-carga></app-reporte-carga></div>
+  <div *ngIf = "selected === 'Aeronaves'"><app-reporte-aeronave></app-reporte-aeronave></div>
+  <div *ngIf = "selected === 'No tripulados'">No tripulados</div>
+  <div *ngIf = "selected === 'Cancelados'">Cancelados</div>

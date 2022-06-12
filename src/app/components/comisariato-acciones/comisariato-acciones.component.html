@@ -1,0 +1,97 @@
+<div class="buscador">
+    <div class="buscador2">
+        <h2> Seleccione el Vuelo para cargar los insumos</h2>
+        <mat-form-field appearance="fill">
+            <mat-label>Ejemplo: SF 1364</mat-label>
+            <input matInput [formControl]="vuelo" required>
+            <mat-error *ngIf="vuelo.invalid">Debes ingresar un valor</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Fecha del vuelo</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)] = "fecha" disabled (dateInput)="addEvent('input', $event)">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled = "false"></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Hora del vuelo</mat-label>
+            <input matInput [ngxTimepicker]="picker2" [format] = 24 [formControl] = "time" required>
+            <ngx-material-timepicker #picker2></ngx-material-timepicker>
+            <mat-error *ngIf="time.invalid">Debes ingresar un valor</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary"  (click)="buscar()" [disabled] = "!eventoFecha || !vuelo.valid || !time.valid" style="margin-left: 10px"> Buscar </button>
+        <div *ngIf="error">
+            <h1>
+                No se encontraron insumos para este vuelo
+            </h1>
+        </div>
+        <div *ngIf="errorInsumo">
+            <h1>
+                Insumos ya cargados, seleccione otro vuelo.
+            </h1>
+        </div>
+    </div>
+</div>
+<div *ngIf="tabla" class = "carga">
+    <h1> Vuelo Numero: {{vuelo.value}} </h1>
+    <div class="submit">
+        <button mat-raised-button color="primary" (click)="enviar()" [disabled]="!isAllSelected()"> Subir Insumos </button>
+    </div>
+    <div [formGroup]="insumos" class="verificar">
+        <h2> Marcar lo realizado </h2>
+        <div class="container">
+            <div class = "{{cambiarClase('limpieza')}}">
+                <mat-checkbox formControlName = "limpieza" class = "checkbox" [color]="color"> Limpieza de la nave </mat-checkbox>
+            </div>
+            <div class = "{{cambiarClase('verificacion')}}">
+                <mat-checkbox formControlName = "verificacion" class = "checkbox" [color]="color"> Verificación interna </mat-checkbox>
+            </div>
+            <div class = "{{cambiarClase('seguridad')}}">
+                <mat-checkbox formControlName = "seguridad" class = "checkbox" [color]="color"> Carga de elementos de seguridad </mat-checkbox>
+            </div >
+            <div class = "{{cambiarClase('bolsas')}}">
+                <mat-checkbox formControlName = "bolsas" class = "checkbox" [color]="color"> Carga de bolsas para el mareo </mat-checkbox>
+            </div>
+        </div>
+    </div>
+    <div class = "table">
+        <h2> Marcar los Insumos cargados </h2>
+        <table mat-table [dataSource]= "dataTable">
+            <ng-container matColumnDef="select" class="select">
+                <th mat-header-cell *matHeaderCellDef>
+                  <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                [color] = "color"
+                                [aria-label]="checkboxLabel()">
+                  </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row" >
+                  <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null"
+                                [color] = "color"
+                                [checked]="selection.isSelected(row)"
+                                [aria-label]="checkboxLabel(row)">
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+            <ng-container matColumnDef = "Description">
+                <th mat-header-cell *matHeaderCellDef > Descripcion </th>
+                <td mat-cell *matCellDef="let carga" > {{carga.Description}} </td>
+            </ng-container>
+            <ng-container matColumnDef = "Name">
+                <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                <td mat-cell *matCellDef="let carga" > {{carga.Name}} </td>
+            </ng-container>
+            <ng-container matColumnDef = "Type">
+                <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                <td mat-cell *matCellDef="let carga" > {{carga.Type}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" ></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div class="submit">
+            <button mat-raised-button color="primary" (click)="enviar()" [disabled]="!isAllSelected()"> Subir Insumos </button>
+        </div>
+    </div>
+</div>

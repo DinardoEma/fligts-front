@@ -1,0 +1,29 @@
+table {
+    width: 100%;
+}
+.submit{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.carga{
+    justify-content: center;
+    background-color: rgb(255, 255, 255, 0.4);
+    width: 100%
+    
+}
+h1{
+    text-align: center;
+}
+.buscador{
+    margin-top: 20px;
+    background-color: rgb(255, 255, 255, 0.4);
+    width: 100%;
+    text-align: center;
+}
+.buscador mat-form-field{
+    margin-left: 20px;
+}
+.buscador2{
+    margin-left: 20px;
+}
