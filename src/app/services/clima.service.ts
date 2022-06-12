@@ -12,9 +12,13 @@ export class ClimaService{
   codigoClima: number;
   lat: any;
   lon: any;
-  imagenSol = '../../../assets/clima/sol.png';
-  imagenNube = '../../../assets/clima/neblina.png';
-  imagenLluvia = '../../../assets/clima/lluvia.png';
+  imagenSol = '../../../assets/clima/sun.png';
+  imagenNube = '../../../assets/clima/cloud.png';
+  imagenNeblina = '../../../assets/clima/fog.png';
+  imagenLluvia = '../../../assets/clima/rain.png';
+  imagenTormenta = '../../../assets/clima/tormenta.png';
+  imagenNieve = '../../../assets/clima/snow.png';
+  imagenLlovizna = '../../../assets/clima/little_rain.png';
   mail = "dinardoema@gmail.com";
 
   constructor(
@@ -93,7 +97,7 @@ export class ClimaService{
   neblina(){
     this.climaActual = 'neblina';
     this.setClase('neblina');
-    this.setImagen(this.imagenNube);
+    this.setImagen(this.imagenNeblina);
     this.enviarMail(this.climaActual);
   }
   lluvia(){
@@ -105,31 +109,31 @@ export class ClimaService{
   llovizna(){
     this.climaActual = 'llovizna';
     this.setClase('llovizna');
-    this.setImagen(this.imagenLluvia);
+    this.setImagen(this.imagenLlovizna);
     this.enviarMail(this.climaActual);
   }
   nevado(){
     this.climaActual = 'nevado';
     this.setClase('nevado');
-    this.setImagen(this.imagenLluvia);
+    this.setImagen(this.imagenNieve);
     this.enviarMail(this.climaActual);
   }
   lluviaIntermitente(){
     this.climaActual = 'lluvia intermitente';
     this.setClase('lluvia-Intermitente');
-    this.setImagen(this.imagenLluvia);
+    this.setImagen(this.imagenLlovizna);
     this.enviarMail(this.climaActual);
   }
   nieveIntermitente(){
     this.climaActual = 'nieve intermitente';
     this.setClase('nieve-Intermitente');
-    this.setImagen(this.imagenLluvia);
+    this.setImagen(this.imagenNieve);
     this.enviarMail(this.climaActual);
   }
   tormentaElectrica(){
     this.climaActual = 'Tormenta Electrica';
     this.setClase('Tormenta-Electrica');
-    this.setImagen(this.imagenLluvia);
+    this.setImagen(this.imagenTormenta);
     this.enviarMail(this.climaActual);
   }
   climaActualToTexto( ){
