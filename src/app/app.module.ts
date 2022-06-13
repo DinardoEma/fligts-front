@@ -49,6 +49,8 @@ import { ReporteAeronaveComponent } from './components/reporte-aeronave/reporte-
 import { ClimaComponent } from './components/clima/clima.component';
 import { ClimaDetalleComponent } from './components/clima-detalle/clima-detalle.component';
 import { ClimaService } from './services/clima.service';
+import { ReporteNotripComponent } from './components/reporte-notrip/reporte-notrip.component';
+import { ReporteCancelComponent } from './components/reporte-cancel/reporte-cancel.component';
 
 
 @NgModule({
@@ -76,7 +78,9 @@ import { ClimaService } from './services/clima.service';
     ReportesComponent,
     ReporteAeronaveComponent,
     ClimaComponent,
-    ClimaDetalleComponent
+    ClimaDetalleComponent,
+    ReporteNotripComponent,
+    ReporteCancelComponent
   ],
   imports: [
     BrowserModule,

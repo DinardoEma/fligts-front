@@ -69,3 +69,8 @@ h1.example-app-name {
 .Tormenta-Electrica{
   box-shadow: rgba(139, 139, 139, 0.918) 0px 30px 60px -12px inset,  rgb(255, 230, 0) 0px 18px 36px -18px inset;
 }
+
+#clima:hover{
+  background-color: rgb(56, 0, 63);
+  cursor: pointer;
+} 

@@ -106,27 +106,9 @@ export class ClimaService{
     this.setImagen(this.imagenLluvia);
     this.enviarMail(this.climaActual);
   }
-  llovizna(){
-    this.climaActual = 'llovizna';
-    this.setClase('llovizna');
-    this.setImagen(this.imagenLlovizna);
-    this.enviarMail(this.climaActual);
-  }
   nevado(){
     this.climaActual = 'nevado';
     this.setClase('nevado');
-    this.setImagen(this.imagenNieve);
-    this.enviarMail(this.climaActual);
-  }
-  lluviaIntermitente(){
-    this.climaActual = 'lluvia intermitente';
-    this.setClase('lluvia-Intermitente');
-    this.setImagen(this.imagenLlovizna);
-    this.enviarMail(this.climaActual);
-  }
-  nieveIntermitente(){
-    this.climaActual = 'nieve intermitente';
-    this.setClase('nieve-Intermitente');
     this.setImagen(this.imagenNieve);
     this.enviarMail(this.climaActual);
   }
@@ -164,23 +146,23 @@ export class ClimaService{
 
 
       case 51:
-        this.llovizna();
+        this.lluvia();
         break;
 
       case 53:
-        this.llovizna();
+        this.lluvia();
         break;  
 
       case 55:
-        this.llovizna();
+        this.lluvia();
         break; 
 
       case 56:
-        this.llovizna();
+        this.lluvia();
         break;
 
       case 57:
-        this.llovizna();
+        this.lluvia();
         break;
 
       case 61:
@@ -220,23 +202,23 @@ export class ClimaService{
         break;
 
       case 80:
-        this.lluviaIntermitente();
+        this.lluvia();
         break;
 
       case 81:
-        this.lluviaIntermitente();
+        this.lluvia();
         break;   
 
       case 82:
-        this.lluviaIntermitente();
+        this.lluvia();
         break;
 
       case 85:
-        this.nieveIntermitente();
+        this.nevado();
         break;
 
       case 86:
-        this.nieveIntermitente();
+        this.nevado();
         break;
 
       case 95:

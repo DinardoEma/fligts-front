@@ -39,20 +39,8 @@ export class ClimaComponent implements OnInit {
     this.climaService.lluvia();
     this.climaActual = this.climaService.getClase();
   }
-  llovizna(){
-    this.climaService.llovizna();
-    this.climaActual = this.climaService.getClase();
-  }
   nevado(){
     this.climaService.nevado();
-    this.climaActual = this.climaService.getClase();
-  }
-  lluviaIntermitente(){
-    this.climaService.lluviaIntermitente();
-    this.climaActual = this.climaService.getClase();
-  }
-  nieveIntermitente(){
-    this.climaService.nieveIntermitente();
     this.climaActual = this.climaService.getClase();
   }
   tormentaElectrica(){

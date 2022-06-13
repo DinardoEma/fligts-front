@@ -84,9 +84,9 @@ export class SidenavComponent implements OnDestroy, OnInit {
         this.fillerNav.push({name: "Historial Vuelo", route:"historial", icon:"flight"}); 
         this.fillerNav.push({name: "Reportes", route:"reporte-c", icon:"assignment"}); 
         this.fillerNav.push({name: "Carga", route:"carga", icon:"business_center"});
-        this.fillerNav.push({name: "Dashboard", route:"dashboard", icon:"assignment"});
-        this.fillerNav.push({name: "Comisariato", route:"comisariato", icon:"assignment"});
-        this.fillerNav.push({name: "Clima", route:"clima", icon:"assignment"});
+        this.fillerNav.push({name: "Dashboard", route:"dashboard", icon:"pie_chart"});
+        this.fillerNav.push({name: "Comisariato", route:"comisariato", icon:"card_travel"});
+        this.fillerNav.push({name: "Clima", route:"clima", icon:"cloud"});
       }
       if(this.rol === 2){
         this.fillerNav.push({name: "Perfil", route:"user", icon:"person"});

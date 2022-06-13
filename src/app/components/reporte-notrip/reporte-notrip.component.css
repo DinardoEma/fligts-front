@@ -1,0 +1,11 @@
+.reporte{
+    margin-top: 20px;
+    margin-left: 20px;
+    text-align: center;
+}
+.reportes{
+    margin-top: 20px;
+    margin-left: 20%;
+    background-color: rgb(255, 255, 255, 0.4);
+    width: 800px
+}
