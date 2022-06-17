@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
   dashboard: any;
-  selected = '360';
-  dashboards: any[] = ['Ninguno', '360', 'Operaciones Terrestres'];
+  selected = 'Vision 360';
+  dashboards: any[] = ['Ninguno', 'Vision 360', 'Operaciones Terrestres'];
   constructor() { }
 
   ngOnInit(): void {

@@ -15,6 +15,7 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit{
+  spinner: boolean = false;
   user: any;
   dataTable: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -33,35 +34,42 @@ export class MainComponent implements OnInit{
   }
 
   cargarDatos(update: boolean){
+    this.spinner = true;
     this.http.get<any>('https://opr-terrestres.herokuapp.com/v1/losilegales/usuarios')
     .subscribe((data) => {
       if(update){
         this.dataTable.data = data;
+        this.spinner = false;
       }
       else {
         this.dataTable = new MatTableDataSource(data);
+        this.spinner = false;
       }
       this.dataTable.paginator = this.paginator;
     });
   }
 
   
-  displayedColumns: string[] = ['name', 'apellido','dni','codigo','correo', 'rol','aeropuerto','activo','nombreCreador' ,'edit'];
-  
-  /*getRutas(){
-    console.log("getRutas");
-    this.http.get<any>('https://opr-terrestres.herokuapp.com/v1/losilegales/rutas').subscribe((data) => {
-      console.log(data);
-    })
-  }*/
-
-
+  displayedColumns: string[] = ['name', 'apellido','dni','codigo','correo', 'rol','aeropuerto','activo','nombreCreador' ,'edit', 'delete'];
 
   usuarios(){
     this.router.navigate(['./main']);
   }
   createUser(){
     this.router.navigate(['./add']);
+  }
+
+  deleteUser(data:any){
+    let borrar = confirm("Realmente desesa eliminar al usuario: " + data.nombre);
+    if(borrar){
+      data.activo = false;
+      const headers = { 'content-type': 'application/json'};
+      this.http.put<any>('https://opr-terrestres.herokuapp.com/v1/losilegales/usuario', data, {headers: headers}).subscribe(data => {
+        confirm("Usuario eliminado con exito");
+        this.cargarDatos(true);
+      });
+    }
+    else console.log("no borrar");
   }
 
   editarUser(info:any){

@@ -20,6 +20,7 @@ export interface Carga {
   styleUrls: ['./carga.component.css'], 
 })
 export class CargaComponent implements OnInit {
+  spinner: boolean = false;
   dataTable: any;
   color='primary';
   displayedColumns: String[];
@@ -31,8 +32,20 @@ export class CargaComponent implements OnInit {
   tabla: boolean = false;
   error: boolean = false;
   estado: boolean = false;
+  errorReal: boolean = false;
+  errorModulo: boolean = false;
   urlBase = 'https://opr-terrestres.herokuapp.com/v1/losilegales/cargas/';
   
+  codigos: string[] = [];
+  codigosVuelos: string[] = [];
+  fechas: string[] = [];
+  hora: string[] = [];
+  selectedVuelo: any;
+  selectedFecha: any;
+  selectedHora: any;
+  selectedSeleccion = 'Sistema';
+  seleccion: string[] = ['Manual', 'Sistema'];
+
   events: string[] = [];
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
@@ -48,14 +61,67 @@ export class CargaComponent implements OnInit {
 
   ngOnInit(): void {
     this.displayedColumns = ['select', 'idCarga', 'codigoPasajero', 'tipo', 'peso', 'tag', 'estadoCarga'];
+    this.allCargas();
   }
 
-  obtenerCargas(){
-    let fechaReal = this.armarFecha();
-    let hora = this.armarHora();
-    let url = this.urlBase + this.vuelo.value;
-    let url2 = url + '-' + fechaReal + hora;
-    console.log(url2);
+  selectClick(data:any){
+    this.codigosVuelos.forEach((element:any, index: any) => {
+      if(element.match(data)){
+        this.selectedFecha = this.fechas[index];
+        this.selectedHora = this.hora[index];
+      }
+    });
+  }
+
+  allCargas(){
+    let url = 'https://opr-terrestres.herokuapp.com/v1/losilegales/cargas';
+    this.http.get<any>(url).subscribe( (response) => {
+      response.forEach((element : any) => {
+        if(this.codigoExiste(element.codigo)){
+        }
+        else this.codigos.push(element.codigo);
+      });
+      this.armarSelects(this.codigos);
+    });
+  }
+
+  codigoExiste(data: any){
+    let existe = false;
+    this.codigos.forEach(element => {
+      if(element.match(data)){
+        existe = true;
+      }
+    });
+    return existe;
+  }
+
+  armarSelects(data: any){
+    data.forEach((element:any) => {
+      let vuelo2 = element.split('-');
+      let codigoVuelo = vuelo2[0];
+      let fechaCompleta = vuelo2[1];
+      let fecha = fechaCompleta.slice(0,8);
+      let hora = fechaCompleta.slice(8);
+      this.codigosVuelos.push(codigoVuelo);
+      this.fechas.push(fecha);
+      this.hora.push(hora);
+    });
+  }
+
+
+
+
+  obtenerCargas(select: any){
+    let url2: any;
+    if(select){
+      url2 = this.urlBase + this.selectedVuelo + '-' + this.selectedFecha + this.selectedHora;
+    }
+    else {
+      let fechaReal = this.armarFecha();
+      let hora = this.armarHora();
+      let url = this.urlBase + this.vuelo.value;
+      url2 = url + '-' + fechaReal + hora;
+    }
     this.http.get<any>(url2).subscribe((data) => {
       console.log(data);
       if(data.length > 0){
@@ -64,21 +130,48 @@ export class CargaComponent implements OnInit {
         }
         else this.estado = false;
         this.dataTable = new MatTableDataSource(data);
+        this.spinner = false;
         this.tabla = true;
       }
       else {
         this.tabla = false;
         this.error = true;
       }
+    },
+    err=> {
+      if(err != null){
+        if(err.error.message.match("peso")){
+          this.spinner = false;
+          this.tabla = false;
+          this.errorModulo = true;
+        }
+        else {
+          this.spinner = false;
+          this.tabla = false;
+          this.errorReal = true;
+        }
+      }
     });
   }
 
   buscar(){
+    this.spinner = true;
+    this.errorReal = false;
+    this.errorModulo = false;
     this.error = false;
-    this.obtenerCargas();
+    this.obtenerCargas(false);
+  }
+
+  buscarSelect(){
+    this.spinner = true;
+    this.errorReal = false;
+    this.errorModulo = false;
+    this.error = false;
+    this.obtenerCargas(true);
   }
 
   enviar(){
+    this.spinner = true;
     const headers = { 'content-type': 'application/json'};
     let fechaReal = this.armarFecha();
     let hora = this.armarHora();
@@ -87,6 +180,7 @@ export class CargaComponent implements OnInit {
     console.log(url);
     this.http.put(url, '', {headers: headers}).subscribe((data) => {
       if(data){
+        this.spinner = false;
         alert("se cargo la carga con exito");
         this.masterToggle();
         this.tabla = false;

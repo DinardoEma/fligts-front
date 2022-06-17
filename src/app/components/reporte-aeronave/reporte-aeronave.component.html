@@ -2,6 +2,8 @@
     <div class="reporte">
         <h2> Top Aeronave mas usada </h2>
         <button mat-raised-button color="primary"  (click)="generarReporteAeronave()"> Generar Reporte </button>
+        <button mat-raised-button color="primary"  > Descargar Reporte </button>
+        <mat-spinner *ngIf="spinner"></mat-spinner>
         <div *ngIf = "reporteAeronave">
             <pdf-viewer 
                 [src] = "pdfSrc"

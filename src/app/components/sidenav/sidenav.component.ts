@@ -79,7 +79,6 @@ export class SidenavComponent implements OnDestroy, OnInit {
       this.flag = !this.flag;
       if(this.rol === 1){
         this.fillerNav.push({name: "Usuarios", route:"main", icon:"home"});
-        this.fillerNav.push({name: "Crear Usuario", route:"add", icon:"add"});
         this.fillerNav.push({name: "Perfil", route:"user", icon:"person"});
         this.fillerNav.push({name: "Historial Vuelo", route:"historial", icon:"flight"}); 
         this.fillerNav.push({name: "Reportes", route:"reporte-c", icon:"assignment"}); 

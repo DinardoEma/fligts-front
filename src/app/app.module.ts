@@ -51,6 +51,7 @@ import { ClimaDetalleComponent } from './components/clima-detalle/clima-detalle.
 import { ClimaService } from './services/clima.service';
 import { ReporteNotripComponent } from './components/reporte-notrip/reporte-notrip.component';
 import { ReporteCancelComponent } from './components/reporte-cancel/reporte-cancel.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -105,7 +106,8 @@ import { ReporteCancelComponent } from './components/reporte-cancel/reporte-canc
     PdfViewerModule,
     MatDatepickerModule,
     NgxMaterialTimepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatProgressSpinnerModule
   ],
   providers: [AuthService, AuthGuard, ClimaService],
   bootstrap: [AppComponent]

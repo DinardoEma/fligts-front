@@ -64,3 +64,6 @@ select:-webkit-autofill:focus {
 .errorLogin{
     color: red;
 }
+.spinner{
+    margin-left: 40%;
+}

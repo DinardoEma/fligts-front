@@ -10,7 +10,6 @@ import { ClimaService } from 'src/app/services/clima.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-
   rol : string = '';
   nombre: string = '';
   apellido: string = '';
@@ -85,7 +84,6 @@ export class UserComponent implements OnInit {
     this.clima.getCoordenadas(this.aeropuerto);
     return this.auth.setIata(this.aeropuerto);
   }
-
 
 }
 

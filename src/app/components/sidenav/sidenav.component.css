@@ -15,7 +15,7 @@
   z-index: 2;
 }
 .example-toolbar{
-  /*background: rgb(185, 22, 136);*/
+  background: #3a84b7;
 }
 h1.example-app-name {
   margin-left: 8px;
@@ -30,8 +30,10 @@ h1.example-app-name {
 }
 
 .sidenavContent{
-  background: -prefix-linear-gradient(left, rgb(197, 129, 206), rgb(156, 15, 114));
-  background: linear-gradient(to right, rgb(197, 129, 206), rgb(156, 15, 114));
+  /*background: -prefix-linear-gradient(left, rgb(197, 129, 206), rgb(156, 15, 114));
+  background: linear-gradient(to right, rgb(197, 129, 206), rgb(156, 15, 114));*/
+  background: -prefix-linear-gradient(left, rgb(146, 172, 202), rgb(39, 175, 180));
+  background: linear-gradient(to right, rgb(146, 172, 202), rgb(39, 175, 180));
 }
 
 .soleado{

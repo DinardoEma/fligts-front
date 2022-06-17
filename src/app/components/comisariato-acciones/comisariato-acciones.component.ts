@@ -21,7 +21,7 @@ export interface Carga {
   styleUrls: ['./comisariato-acciones.component.css']
 })
 export class ComisariatoAccionesComponent implements OnInit {
-
+  spinner: boolean = false;
   insumos: FormGroup;
   dataTable: any;
   color='primary';
@@ -35,6 +35,15 @@ export class ComisariatoAccionesComponent implements OnInit {
   error: boolean = false;
   errorInsumo: boolean = false;
 
+  codigos: string[] = [];
+  codigosVuelos: string[] = [];
+  fechas: string[] = [];
+  hora: string[] = [];
+  selectedVuelo: any;
+  selectedFecha: any;
+  selectedHora: any;
+  selectedSeleccion = 'Sistema';
+  seleccion: string[] = ['Manual', 'Sistema'];
   events: string[] = [];
 
   constructor(
@@ -49,7 +58,47 @@ export class ComisariatoAccionesComponent implements OnInit {
       });
   }
 
+  selectClick(data:any){
+    this.codigosVuelos.forEach((element:any, index: any) => {
+      if(element.match(data)){
+        this.selectedFecha = this.fechas[index];
+        this.selectedHora = this.hora[index];
+      }
+    });
+  }
+  allCargas(){
+    let url = 'https://opr-terrestres.herokuapp.com/v1/losilegales/cargas';
+    this.http.get<any>(url).subscribe( (response) => {
+      response.forEach((element : any) => {
+        if(this.codigoExiste(element.codigo)){
+        }
+        else this.codigos.push(element.codigo);
+      });
+      this.armarSelects(this.codigos);
+    });
+  }
+  codigoExiste(data: any){
+    let existe = false;
+    this.codigos.forEach(element => {
+      if(element.match(data)){
+        existe = true;
+      }
+    });
+    return existe;
+  }
 
+  armarSelects(data: any){
+    data.forEach((element:any) => {
+      let vuelo2 = element.split('-');
+      let codigoVuelo = vuelo2[0];
+      let fechaCompleta = vuelo2[1];
+      let fecha = fechaCompleta.slice(0,8);
+      let hora = fechaCompleta.slice(8);
+      this.codigosVuelos.push(codigoVuelo);
+      this.fechas.push(fecha);
+      this.hora.push(hora);
+    });
+  }
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     if(event != null){
@@ -60,25 +109,33 @@ export class ComisariatoAccionesComponent implements OnInit {
 
   ngOnInit(): void {
     this.displayedColumns = ['select', 'Name', 'Type' , 'Description', ];
+    this.allCargas();
   }
 
-  obtenerCargas(){
-    let fechaReal = this.armarFecha();
-    let hora = this.armarHora();
-    let url =  'https://operaciones-mantenimiento.herokuapp.com/Insumo/Vuelo/allByVuelo/' + this.vuelo.value;
-    let url2 = url + '-' + fechaReal + hora;
-    console.log(url2);
+  obtenerCargas(selected: any){
+    let url2: any;
+    let url ='https://operaciones-mantenimiento.herokuapp.com/Insumo/Vuelo/allByVuelo/';
+    if(selected){
+      url2 = url + this.selectedVuelo + '-' + this.selectedFecha + this.selectedHora;
+    }
+    else{
+      let fechaReal = this.armarFecha();
+      let hora = this.armarHora();
+      url + this.vuelo.value;
+      url2 = url + '-' + fechaReal + hora;
+    }
     let Insumo: string [] = [];
     this.http.get<any>(url2).subscribe((data) => {
-      console.log(data);
       if(data.length > 0){
         data.forEach( (element : any) => {
           Insumo.push(element.Supply);
         });
         this.dataTable = new MatTableDataSource(Insumo);
+        this.spinner = false;
         this.tabla = true;
       }
       else {
+        this.spinner = false;
         this.tabla = false;
         this.error = true;
       }
@@ -86,16 +143,24 @@ export class ComisariatoAccionesComponent implements OnInit {
   }
 
   buscar(){
+    this.spinner = true;
     this.error = false;
-    this.obtenerCargas();
+    this.obtenerCargas(false);
   }
+  buscarSelect(){
+    this.spinner = true;
 
+    this.error = false;
+    this.obtenerCargas(true);
+  }
   enviar(){
+    this.spinner = true;
     const headers = { 'content-type': 'application/json'};
     let body = this.armarBody();
     let url = 'https://opr-terrestres.herokuapp.com/v1/losilegales/comisariato';
     this.http.post(url, body, {headers: headers}).subscribe((data) => {
       if(data){
+        this.spinner = false;
         alert("se cargo los insumos con exito");
         this.masterToggle();
         this.tabla = false;
@@ -103,6 +168,7 @@ export class ComisariatoAccionesComponent implements OnInit {
     },
     (error) => {
       if(error.error.message.match('ya existe')){
+        this.spinner = false;
         this.tabla = false;
         this.errorInsumo = true;
       }

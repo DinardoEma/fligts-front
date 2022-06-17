@@ -2,27 +2,67 @@
     <div class="buscador2">
             <h2> Seleccione el Vuelo para cargar el equipaje</h2>
         <mat-form-field appearance="fill">
-            <mat-label>Ejemplo: SF 1364</mat-label>
-            <input matInput [formControl]="vuelo" required>
-            <mat-error *ngIf="vuelo.invalid">Debes ingresar un valor</mat-error>
+            <mat-label>Forma de busqueda</mat-label>
+            <mat-select [(value)]="selectedSeleccion">
+            <mat-option *ngFor="let seleccion of seleccion" [value] = "seleccion"> {{seleccion}}</mat-option>
+            </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Fecha del vuelo</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)] = "fecha" disabled (dateInput)="addEvent('input', $event)">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker disabled = "false"></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Hora del vuelo</mat-label>
-            <input matInput [ngxTimepicker]="picker2" [format] = 24 [formControl] = "time" required>
-            <ngx-material-timepicker #picker2></ngx-material-timepicker>
-            <mat-error *ngIf="time.invalid">Debes ingresar un valor</mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="primary"  (click)="buscar()" [disabled] = "!eventoFecha || !vuelo.valid || !time.valid" style="margin-left: 10px"> Buscar </button>
+        <div *ngIf="selectedSeleccion === 'Manual'">
+            <mat-form-field appearance="fill">
+                <mat-label>Ejemplo: SF 1364</mat-label>
+                <input matInput [formControl]="vuelo" required>
+                <mat-error *ngIf="vuelo.invalid">Debes ingresar un valor</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha del vuelo</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)] = "fecha" disabled (dateInput)="addEvent('input', $event)">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker disabled = "false"></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Hora del vuelo</mat-label>
+                <input matInput [ngxTimepicker]="picker2" [format] = 24 [formControl] = "time" required>
+                <ngx-material-timepicker #picker2></ngx-material-timepicker>
+                <mat-error *ngIf="time.invalid">Debes ingresar un valor</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary"  (click)="buscar()" [disabled] = "!eventoFecha || !vuelo.valid || !time.valid" style="margin-left: 10px"> Buscar </button>
+        </div>
+        <div *ngIf="selectedSeleccion === 'Sistema'">
+            <mat-form-field appearance="fill">
+                <mat-label>Selecciona un Vuelo</mat-label>
+                <mat-select [(value)]="selectedVuelo">
+                <mat-option *ngFor="let codigos of codigosVuelos" [value] = "codigos" (click)="selectClick(codigos)"> {{codigos}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Selecciona una Fecha</mat-label>
+                <mat-select [(value)]="selectedFecha">
+                <mat-option *ngFor="let fecha of fechas" [value] = "fecha"> {{fecha}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Selecciona una Hora</mat-label>
+                <mat-select [(value)]="selectedHora">
+                <mat-option *ngFor="let hora of hora" [value] = "hora"> {{hora}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-raised-button color="primary"  (click)="buscarSelect()" [disabled] = "!(selectedVuelo!=null) || !(selectedFecha!=null) || !(selectedHora!=null)" style="margin-left: 10px"> Buscar </button>
+        </div>
+        <mat-spinner class="spinner" *ngIf="spinner"></mat-spinner>
         <div *ngIf="error">
             <h1>
                 No se encontraron cargas para este vuelo
+            </h1>
+        </div>
+        <div *ngIf="errorReal">
+            <h1>
+                Ocurrio un error
+            </h1>
+        </div>
+        <div *ngIf="errorModulo">
+            <h1>
+                Ocurrio un error por falta de información por parte del Módulo B.
             </h1>
         </div>
     </div>

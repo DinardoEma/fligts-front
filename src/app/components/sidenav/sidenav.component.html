@@ -1,5 +1,5 @@
 <div class="sidenav" [class.example-is-mobile]="mobileQuery.matches">
-    <mat-toolbar color = "primary" class="example-toolbar" *ngIf="isLoggedIn$ | async as isLoggedIn" >
+    <mat-toolbar class="example-toolbar" *ngIf="isLoggedIn$ | async as isLoggedIn" >
       <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
       <h1 class="example-app-name">{{ user }}</h1>
       <h1 class="example-app-name">{{ rolTexto }}</h1>

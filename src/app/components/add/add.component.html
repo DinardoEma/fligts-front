@@ -45,9 +45,7 @@
     <button mat-raised-button color="primary" (click)="guardar()" 
     [disabled]="!nombre.valid || !apellido.valid || !contrasena.valid || !email.valid || !dni.valid"
     >Crear</button>
-</div>
-<div *ngIf= "permisos.match('NO1')" >
-    No tenes los permisos
+    <mat-spinner *ngIf="spinner"></mat-spinner>
 </div>
 
 

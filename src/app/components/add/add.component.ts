@@ -18,7 +18,7 @@ export class AddComponent implements OnInit {
               private http: HttpClient,
               private auth: AuthService
     ) { }
-
+  spinner: boolean = false;
   rol: string = '';
   nombreCreador: string = '';
   aeropuerto: string = '';
@@ -56,12 +56,14 @@ export class AddComponent implements OnInit {
     this.router.navigate(['./main']);
   }
   guardar(){
+    this.spinner = true;
     const headers = { 'content-type': 'application/json'};
     let body = JSON.stringify(this.body());
     this.http.post('https://opr-terrestres.herokuapp.com/v1/losilegales/usuario', body, {headers: headers})
       .subscribe(
         (response) => {
             console.log(response);
+            this.spinner = false;
             alert("usuario creado con exito");
             this.router.navigate(['./main']);
         },

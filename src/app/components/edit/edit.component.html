@@ -59,14 +59,13 @@
         
     </div>
     <div mat-dialog-actions>
-        <button mat-raised-button color="warn" (click) = "borrar()"> Borrar Usuario    </button>
-        <button mat-button (click) = "cancelar()"> Cancelar    </button>
-        <button mat-button [mat-dialog-close]="{idUsuario: data.idUsuario, nombre: data.nombre, 
+        <button mat-button class="cancel" (click) = "cancelar()"> Cancelar    </button>
+        <button mat-button class="confirm" [mat-dialog-close]="{idUsuario: data.idUsuario, nombre: data.nombre, 
             apellido: data.apellido, codigoUsuario: data.codigoUsuario, dni: data.dni, 
             'contraseña': data.contrasena, fechaCreacion: data.fechaCreacion, nombreCreador: data.nombreCreador, 
             nombreModificador: data.nombreModificador, activo: data.activo, correo: data.correo,
             rolUsuario: data.rolUsuario, iataAeropuerto: data.iataAeropuerto}" 
-        cdkFocusInitial>Ok</button>
+        cdkFocusInitial> Modificar </button>
     </div>
 </div>
 

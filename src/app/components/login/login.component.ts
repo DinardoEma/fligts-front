@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
               private authService: AuthService
     ) { }
+  spinner: boolean = false;
   hide :boolean = true;
   disabled : boolean = false;
   user = new FormControl('', [Validators.required, Validators.pattern(".{8}")]);
@@ -46,6 +47,7 @@ export class LoginComponent implements OnInit {
   }
   
   ingresar(){
+    this.spinner = true;
     this.authService.login(this.user.value,this.password.value);
     this.errorLogin$ = this.authService.isErrorLogin;
   }

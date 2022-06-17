@@ -1,6 +1,7 @@
-<div class = "usuarios"> 
-    <div class = "table">
-        <table mat-table [dataSource]= "dataTable">
+<div class = "usuarios">
+    <mat-spinner class="spinner" *ngIf="spinner"></mat-spinner> 
+    <div  class = "table">   
+        <table *ngIf="!spinner" mat-table [dataSource]= "dataTable">
             <ng-container matColumnDef = "name">
                 <th mat-header-cell *matHeaderCellDef> Nombre </th>
                 <td mat-cell *matCellDef="let user"> {{user.nombre}} </td>
@@ -46,6 +47,15 @@
                 <td mat-cell *matCellDef="let row"> 
                     <button mat-icon-button color="primary" (click) = "editarUser(row)">
                         <mat-icon> edit </mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef = "delete">
+                <th mat-header-cell *matHeaderCellDef> Eliminar
+                </th>
+                <td mat-cell *matCellDef="let row"> 
+                    <button mat-mini-fab color="warn" (click) = "deleteUser(row)">
+                        <mat-icon> delete </mat-icon>
                     </button>
                 </td>
             </ng-container>

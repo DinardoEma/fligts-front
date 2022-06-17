@@ -36,9 +36,4 @@ export class EditComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  borrar(){
-    this.data.activo = false;
-    this.dialogRef.close({"borrado" : this.data});
-  }
-
 }
