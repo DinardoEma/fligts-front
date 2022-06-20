@@ -173,11 +173,21 @@ export class CargaComponent implements OnInit {
   enviar(){
     this.spinner = true;
     const headers = { 'content-type': 'application/json'};
-    let fechaReal = this.armarFecha();
-    let hora = this.armarHora();
+    let fechaReal;
+    let hora;
+    let codigo;
+    if(this.selectedSeleccion.match('Sistema')){
+      fechaReal = this.selectedFecha;
+      hora = this.selectedHora;
+      codigo = this.selectedVuelo;
+    }
+    else {
+      fechaReal = this.armarFecha();
+      hora = this.armarHora();
+      codigo = this.vuelo.value;
+    }
     let urlBaseEstado = 'https://opr-terrestres.herokuapp.com/v1/losilegales/carga/';
-    let url = urlBaseEstado + this.vuelo.value + '-' + fechaReal + hora + '/Cargada';
-    console.log(url);
+    let url = urlBaseEstado + codigo + '-' + fechaReal + hora + '/Cargada';
     this.http.put(url, '', {headers: headers}).subscribe((data) => {
       if(data){
         this.spinner = false;

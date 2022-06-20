@@ -20,7 +20,7 @@
             </ng-container>
             <ng-container matColumnDef = "rol">
                 <th mat-header-cell *matHeaderCellDef> Rol </th>
-                <td mat-cell *matCellDef="let user"> {{user.rolUsuario}} </td>
+                <td mat-cell *matCellDef="let user"> {{rolToTexto(user.rolUsuario)}} </td>
             </ng-container>
             <ng-container matColumnDef = "aeropuerto">
                 <th mat-header-cell *matHeaderCellDef> Aeropuerto </th>

@@ -69,7 +69,6 @@ export class MainComponent implements OnInit{
         this.cargarDatos(true);
       });
     }
-    else console.log("no borrar");
   }
 
   editarUser(info:any){
@@ -106,5 +105,26 @@ export class MainComponent implements OnInit{
       }
     });
   }
+
+  rolToTexto(number:any){
+    let rol = 'otro';
+    if(number === 1){
+      rol = "Administrador";
+    }
+    if(number === 2){
+      rol = "Supervisor de Carga";
+    }
+    if(number === 8){
+      rol = "Supervisor de Comisariato";
+    }
+    if(number === 14){
+      rol = "Auditor";
+    }
+    if(number === 16){
+      rol = "Gerente";
+    }
+    return rol;
+  }
+
 
 }

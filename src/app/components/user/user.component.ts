@@ -53,6 +53,7 @@ export class UserComponent implements OnInit {
         this.aeropuerto = element.iataAeropuerto;
         this.correo = element.correo;
         this.dni = element.dni;
+        this.auth.setRol(this.rolUsuario);
         this.side.setRol(this.rolUsuario);
         this.side.setRolTexto(this.roltoTexto(this.rolUsuario));
       }
@@ -68,14 +69,14 @@ export class UserComponent implements OnInit {
     if(number === 2){
       rol = "Supervisor de Carga";
     }
-    if(number === 3){
-      rol = "Supervisor de Pasajeros";
+    if(number === 8){
+      rol = "Supervisor de Comisariato";
     }
-    if(number === 4){
-      rol = "Supervisor de Pista";
+    if(number === 14){
+      rol = "Auditor";
     }
-    if(number === 5){
-      rol = "Supervisor de Aeronave";
+    if(number === 16){
+      rol = "Gerente";
     }
     return rol;
   }

@@ -52,6 +52,7 @@ import { ClimaService } from './services/clima.service';
 import { ReporteNotripComponent } from './components/reporte-notrip/reporte-notrip.component';
 import { ReporteCancelComponent } from './components/reporte-cancel/reporte-cancel.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ManualComponent } from './components/manual/manual.component';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ClimaComponent,
     ClimaDetalleComponent,
     ReporteNotripComponent,
-    ReporteCancelComponent
+    ReporteCancelComponent,
+    ManualComponent
   ],
   imports: [
     BrowserModule,

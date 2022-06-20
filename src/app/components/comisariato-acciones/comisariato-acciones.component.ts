@@ -46,6 +46,12 @@ export class ComisariatoAccionesComponent implements OnInit {
   seleccion: string[] = ['Manual', 'Sistema'];
   events: string[] = [];
 
+  urlCatering = 'https://operaciones-mantenimiento.herokuapp.com/Insumo/Vuelo/allCateringByVuelo/';
+  urlSanitario = 'https://operaciones-mantenimiento.herokuapp.com/Insumo/Vuelo/allSanitarioByVuelo/';
+  urlVenta = 'https://operaciones-mantenimiento.herokuapp.com/Insumo/Vuelo/allVentaByVuelo/';
+
+  Insumo: string[] = [];
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -113,44 +119,91 @@ export class ComisariatoAccionesComponent implements OnInit {
   }
 
   obtenerCargas(selected: any){
-    let url2: any;
-    let url ='https://operaciones-mantenimiento.herokuapp.com/Insumo/Vuelo/allByVuelo/';
+    let codigoVuelo: any;
     if(selected){
-      url2 = url + this.selectedVuelo + '-' + this.selectedFecha + this.selectedHora;
+      codigoVuelo = this.selectedVuelo + '-' + this.selectedFecha + this.selectedHora;
     }
     else{
       let fechaReal = this.armarFecha();
       let hora = this.armarHora();
-      url + this.vuelo.value;
-      url2 = url + '-' + fechaReal + hora;
+      this.vuelo.value;
+      codigoVuelo = this.vuelo.value + '-' + fechaReal + hora;
     }
-    let Insumo: string [] = [];
-    this.http.get<any>(url2).subscribe((data) => {
+    this.obtenerCatering(codigoVuelo);
+
+  }
+
+  obtenerCatering(codigo: any){
+    let url = this.urlCatering + codigo;
+    this.http.get<any>(url).subscribe((data) => {
+      console.log(data);
       if(data.length > 0){
         data.forEach( (element : any) => {
-          Insumo.push(element.Supply);
+          this.Insumo.push(element.Supply);
         });
-        this.dataTable = new MatTableDataSource(Insumo);
-        this.spinner = false;
-        this.tabla = true;
       }
-      else {
-        this.spinner = false;
-        this.tabla = false;
-        this.error = true;
-      }
+      this.obtenerSanitario(codigo);
+    },
+    error => {
+      this.obtenerSanitario(codigo);
     });
+  }
+  obtenerSanitario(codigo: any){
+    let url = this.urlSanitario + codigo;
+    this.http.get<any>(url).subscribe((data) => {
+      console.log(data);
+      if(data.length > 0){
+        data.forEach( (element : any) => {
+          this.Insumo.push(element.Supply);
+        });
+      }
+      this.obtenerVenta(codigo);
+    },
+    error => {
+      this.obtenerVenta(codigo);
+    });
+  }
+  obtenerVenta(codigo: any){
+    let url = this.urlVenta + codigo;
+    this.http.get<any>(url).subscribe((data) => {
+      console.log(data);
+      if(data.length > 0){
+        data.forEach( (element : any) => {
+          this.Insumo.push(element.Supply);
+        });
+      }
+      this.activarTabla();
+    },
+    error => {
+      this.activarTabla();
+    });
+  }
+
+  activarTabla(){
+    if(this.Insumo.length > 0){
+      this.spinner = false;
+      this.dataTable = new MatTableDataSource(this.Insumo);
+      this.tabla = true;
+    }
+    else {
+      this.spinner = false;
+      this.tabla = false;
+      this.error = true;
+    }
   }
 
   buscar(){
     this.spinner = true;
     this.error = false;
+    this.tabla = false;
+    this.Insumo = [];
     this.obtenerCargas(false);
   }
   buscarSelect(){
     this.spinner = true;
-
     this.error = false;
+    this.tabla = false;
+    this.Insumo = [];
     this.obtenerCargas(true);
   }
   enviar(){
@@ -229,10 +282,17 @@ export class ComisariatoAccionesComponent implements OnInit {
   }
 
   armarBody(){
-    let fechaReal = this.armarFecha();
-    let hora = this.armarHora();
+    let codigo;
+    if(this.selectedSeleccion.match('Sistema')){
+      codigo = this.selectedVuelo + '-' + this.selectedFecha + this.selectedHora;
+    }
+    else {
+      let fechaReal = this.armarFecha();
+      let hora = this.armarHora();
+      codigo = this.vuelo.value + '-' + fechaReal + hora;
+    }
     let body = {
-      "codigo" : this.vuelo.value + '-' + fechaReal + hora,
+      "codigo" : codigo,
       "verificacionLimpieza" : this.insumos.get('limpieza')?.value,
       "verificacionInterna" : this.insumos.get('verificacion')?.value,
       "verificacionElementosSeguridad" : this.insumos.get('seguridad')?.value,

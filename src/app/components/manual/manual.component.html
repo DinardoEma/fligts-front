@@ -1,0 +1,9 @@
+<pdf-viewer 
+    [src] = "pdfSrc"
+    [render-text]="true"
+    [original-size]="false"
+    style="width: 100%; height: 600px"
+></pdf-viewer>
+<div *ngIf="errorManual">
+    <h2> No hay un manual para su Rol, por favor comuniquese con su supervisor directo</h2>
+</div>

@@ -22,7 +22,7 @@ export class AddComponent implements OnInit {
   rol: string = '';
   nombreCreador: string = '';
   aeropuerto: string = '';
-  roles: any[] = ['2', '3', '4', '5', '6'];
+  rolesTexto: any[] = ['Administrador', 'Supervisor de Carga', 'Supervisor de Comisariato', 'Auditor', 'Gerente'];
   permisos = "NO2";
   hide: boolean = true;
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -59,6 +59,7 @@ export class AddComponent implements OnInit {
     this.spinner = true;
     const headers = { 'content-type': 'application/json'};
     let body = JSON.stringify(this.body());
+    console.log(body);
     this.http.post('https://opr-terrestres.herokuapp.com/v1/losilegales/usuario', body, {headers: headers})
       .subscribe(
         (response) => {
@@ -68,11 +69,13 @@ export class AddComponent implements OnInit {
             this.router.navigate(['./main']);
         },
         (error) => {
+          this.spinner = false;
           if(error.error.message != null){
             if(error.error.message.match("ya esta registrado")){
               alert("mail ya registrado");
             }
           }
+          else alert("ocurrio un error");
         }
     );
   }
@@ -84,11 +87,29 @@ export class AddComponent implements OnInit {
       "dni" : this.dni.value,
       "contraseña" : this.contrasena.value,
       "nombreCreador" : this.auth.getCodUser(),
-      "rolUsuario" : this.rol,
+      "rolUsuario" : this.rolToNumber(this.rol),
       "correo" : this.email.value,
       "iataAeropuerto" : this.aeropuerto
     };
     return body;
   }
-
+  rolToNumber(rol: any){
+    let id;
+    if(rol.match('Administrador')){
+      id = 1;
+    }
+    if(rol.match('Supervisor de Carga')){
+      id = 2;
+    }
+    if(rol.match('Supervisor de Comisariato')){
+      id = 8;
+    }
+    if(rol.match('Auditor')){
+      id = 14;
+    }
+    if(rol.match('Gerente')){
+      id = 16;
+    }
+    return id;
+  }
 }

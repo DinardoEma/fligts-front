@@ -11,6 +11,7 @@ export class AuthService {
   iata: any;
   id: number = 0;
   codigoUser : string = '';
+  rol: number = 0;
   
 
   get isLoggedIn() {
@@ -19,8 +20,6 @@ export class AuthService {
   get isErrorLogin(){
     return this.errorLogin;
   }
-
- 
 
   public setError(data: boolean){
     this.errorLogin = data;
@@ -41,7 +40,7 @@ export class AuthService {
         if(response.text.match("exitoso")){
           this.id = response.idUsuario;
           this.codigoUser = response.codigoUsuario;
-          this.Loguear();
+          this.cargarDatos();
         }
         else this.errorLogin = true;
       });
@@ -49,13 +48,23 @@ export class AuthService {
 
   Loguear(){
     this.loggedIn.next(true);
-    this.router.navigate(['/user']);
+    console.log(this.rol);
+    if(this.rol === 1 || this.rol === 14 || this.rol === 16){
+      this.router.navigate(['/dashboard']);
+    }
+    else { this.router.navigate(['/user']); }
   }
   getId(){
     return this.id;
   }
   getCodUser(){
     return this.codigoUser;
+  }
+  getRol(){
+    return this.rol;
+  }
+  setRol(data: any){
+    this.rol = data;
   }
   getIata(){
     return this.iata;
@@ -70,5 +79,19 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  cargarDatos(){
+    this.http.get<any>('https://opr-terrestres.herokuapp.com/v1/losilegales/usuarios')
+    .subscribe((data) => {
+      this.cargarInfo(data);
+    });
+  }
 
+  cargarInfo(data:any){
+    data.forEach((element: any) => {
+      if(element.idUsuario === this.id){
+        this.rol = element.rolUsuario;
+      }
+    });
+    this.Loguear();
+  }
 }

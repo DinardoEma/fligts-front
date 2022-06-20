@@ -17,6 +17,7 @@ import { ReportesComponent } from './components/reportes/reportes.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ComisariatoAccionesComponent } from './components/comisariato-acciones/comisariato-acciones.component';
 import { ClimaComponent } from './components/clima/clima.component';
+import { ManualComponent } from './components/manual/manual.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard]},
   { path: 'comisariato', component: ComisariatoAccionesComponent,canActivate: [AuthGuard]},
   { path: 'clima', component: ClimaComponent,canActivate: [AuthGuard]},
+  { path: 'manual', component: ManualComponent,canActivate: [AuthGuard]},
 
 ];
 

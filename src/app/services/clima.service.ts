@@ -68,9 +68,9 @@ export class ClimaService{
   }
 
   enviarMail(clima: any){
-    console.log("enviar el mail por clima: " + clima);
+    //console.log("enviar el mail por clima: " + clima);
     //descomentar para la presentacion final
-    /*const headers = { 'content-type': 'application/json'};
+    const headers = { 'content-type': 'application/json'};
     let url = 'https://opr-terrestres.herokuapp.com/v1/losilegales/email';
     let body = {
       "to" : this.mail,
@@ -79,7 +79,7 @@ export class ClimaService{
     }
     this.http.post(url, body , {headers: headers}).subscribe( ( response) => {
       console.log(response);
-    });*/
+    });
   }
 
   sol(){
